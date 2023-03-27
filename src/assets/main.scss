@@ -2,6 +2,10 @@
 @use './partials/reset' as *;
 @use './partials/variables' as *;
 
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
 body {
-    background-color: pink;
+    
+    font-family: "Montserrat";
 }
