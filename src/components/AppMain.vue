@@ -5,7 +5,7 @@
             <SelectorComponentVue class="selector p-3"/>
             <div class="list-container p-5">
                 <CardsFoundComponent :cardsFound="store.foundCards" class="bg-dark text-light p-3 d-flex align-items-center" />
-                <div class="row">
+                <div class="row g-4">
                     <div class="col-2" v-for="card in firstCards">
                         <CardComponent :name="card.name" :type="card.archetype" :imgAlt="card.name" class="card-container" :img="card.card_images[0].image_url"/>
                     </div>
@@ -53,6 +53,7 @@ main {
         background-color: #fff;
         .card-container{
             background-color: $tertiary-color;
+            height: 100%;
         }
     }
 
