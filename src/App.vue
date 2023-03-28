@@ -20,6 +20,10 @@ import SpinnerLoradVue from './components/SpinnerLorad.vue';
       }
     },
     created(){
+      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      .then((response)=>{
+        store.archetypes = response.data;
+      });
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
       .then(response => {
         store.cards = response.data;
