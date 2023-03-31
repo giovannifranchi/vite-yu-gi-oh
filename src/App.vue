@@ -19,6 +19,16 @@ import SpinnerLoradVue from './components/SpinnerLorad.vue';
         isBusy: true,
       }
     },
+    methods: {
+      searchCards(){
+        const routeApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype='
+        axios.get(`${routeApi}${store.searchArchetype}`)
+        .then((response)=>{
+          store.cards = response.data.data;
+          store.foundCards = store.cards.length;
+        });
+      }
+    },
     created(){
       axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
       .then((response)=>{
@@ -26,7 +36,8 @@ import SpinnerLoradVue from './components/SpinnerLorad.vue';
       });
       axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
       .then(response => {
-        store.cards = response.data;
+        store.cards = response.data.data.slice(0, 30);
+        store.foundCards = store.cards.length;
       })
       .then(()=>{
         this.isBusy = false;
@@ -38,7 +49,7 @@ import SpinnerLoradVue from './components/SpinnerLorad.vue';
 <template>
   <AppHeader/>
   <SpinnerLoradVue v-if="isBusy"/>
-  <AppMain v-else/>
+  <AppMain @search="searchCards" v-else/>
 </template>
 
 

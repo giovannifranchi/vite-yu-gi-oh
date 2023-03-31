@@ -1,12 +1,12 @@
 <template>
     <main>
 
-        <div class="container">
-            <SelectorComponentVue class="selector p-3" :typeList="store.archetypes"/>
+        <div class="container py-3">
+            <SelectorComponentVue class="selector" :type-list="store.archetypes" @search="$emit('search')"/>
             <div class="list-container p-5">
                 <CardsFoundComponent :cardsFound="store.foundCards" class="bg-dark text-light p-3 d-flex align-items-center" />
                 <div class="row g-4">
-                    <div class="col-2" v-for="card in firstCards" :key="card.id">
+                    <div class="col-2" v-for="card in store.cards" :key="card.id">
                         <CardComponent :name="card.name" :type="card.archetype" :imgAlt="card.name" class="card-container" :img="card.card_images[0].image_url"/>
                     </div>
                 </div>
@@ -32,13 +32,6 @@ import CardComponent from './CardComponent.vue';
                 store,
             }
         },
-        computed: {
-            firstCards(){
-                const first = store.cards.data.slice(0, 30);
-                store.foundCards = first.length;
-                return first;
-            },
-        }
     }
 </script>
 

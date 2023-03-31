@@ -1,19 +1,24 @@
 <template>
-  <div>
     <select
-      class="form-select form-select-lg mb-3">
-      <option selected>Select Spiecies</option>
-      <option value="" v-for="archetype in typeList">{{ archetype.archetype_name }}</option>
+      class="form-select form-select-lg mb-3 "  v-model="store.searchArchetype" @change="$emit('search')">
+      <option selected value="">Select Spiecies</option>
+      <option v-for="archetype in typeList" :value="archetype.archetype_name">{{ archetype.archetype_name }}</option>
     </select>
-  </div>
 </template>
 
 <script>
+import { store } from '../store';
 export default {
     name: 'SelectorComponent',
     props: {
       typeList: Array,
+    },
+    data(){
+      return {
+        store,
+      }
     }
+
 };
 </script>
 
